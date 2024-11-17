@@ -1,0 +1,45 @@
+# Use Golang base image
+FROM golang:1.18-alpine
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Install required dependencies (for PostgreSQL, WebSockets, GraphQL, etc.)
+RUN apk update && apk add --no-cache \
+  git \
+  bash \
+  postgresql-client
+
+#cloning the hemra repo 
+RUN git clone https://github.com/HemeraProtocol/hemera-indexer.git /hemera
+
+# Install Go dependencies
+COPY go.mod go.sum ./
+RUN go mod tidy
+
+# Copy the Go app code
+COPY . .
+
+# Install Go dependencies for WebSocket, PostgreSQL, GraphQL, and Hemra
+RUN go get -u github.com/gin-gonic/gin                
+RUN go get -u gorm.io/gorm                            
+RUN go get -u github.com/jackc/pgx/v5                 
+RUN go get -u github.com/99designs/gqlgen             
+RUN go get -u github.com/gorilla/websocket            
+RUN go get -u github.com/ethereum/go-ethereum         
+RUN go get -u github.com/spf13/viper                  
+RUN go get -u github.com/sirupsen/logrus              
+
+# Set Hemra environment variables
+ENV PROVIDER_URI="http://localhost:8545"   
+ENV POSTGRES_URL="postgresql://delingo_user:securepassword@database:5432/delingo_db"  
+ENV DEBUG_PROVIDER_URI="http://localhost:8545"   
+ENV OUTPUT="jsonfile://output/json"
+ENV ENTITY_TYPES="EXPLORER_BASE, EXPLORER_TOKEN"
+ENV DB_VERSION="head"
+
+# Expose the app port
+EXPOSE 8080
+
+# Command to run the application
+CMD ["go", "run", "main.go"]

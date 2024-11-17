@@ -1,0 +1,90 @@
+# Node.js (Frontend)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+build/
+dist/
+.next/
+.out/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.cache
+.parcel-cache
+.nuxt
+.docusaurus
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.dylib
+*.env
+*.venv/
+venv/
+ENV/
+env/
+
+# Go (Backend)
+bin/
+*.out
+*.test
+*.log
+vendor/
+
+# Docker
+.docker/
+docker-compose.override.yml
+*.log
+
+# Solidity (Smart Contracts)
+*.vscode/
+*.sol
+*.dbg
+*.abi
+*.json
+*.evm
+artifacts/
+build/
+
+# GraphQL (General)
+graphql/
+.graphqlconfig.yml
+
+# WebSockets
+*.ws
+*.wss
+
+# Wallet (Web3/Blockchain Integration)
+wallet/
+*.keystore
+*.json
+*.pem
+
+# VSCode
+.vscode/
+.vscode-test
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Other IDEs (optional, if you're using JetBrains IDEs)
+.idea/
+
+# PostgreSQL
+*.db
+*.sql
+*.sqlite
+
+# Additional settings
+*.env.local
